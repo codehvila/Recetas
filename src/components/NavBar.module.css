@@ -1,0 +1,34 @@
+.navbar {
+  background-color: rgb(89, 4, 146);
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: baseline;
+  max-width: 960px; /* 1200px; */
+  margin: 0 auto;
+}
+
+.navbar .brand {
+  color: #ddd;
+  font-size: 2rem;
+  margin-right: auto;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a:last-child {
+  color: #ddd;
+  text-decoration: none;
+  padding: 0.2rem 1rem;
+  margin-left: 0 auto;
+  border-radius: 0.3rem;
+  border: 2px solid #ddd;
+}
+
+.navbar a:last-child:hover {
+  background-color: #ddd;
+  color:rgb(89, 4, 146);
+}
