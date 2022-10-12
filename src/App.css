@@ -2,7 +2,13 @@
   min-height: 100%;
 }
 
-
+.appMain {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

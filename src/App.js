@@ -14,12 +14,14 @@ function App() {
       <>
         <BrowserRouter>
           <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/recipes/:recipeId" element={<Recipe />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/create" element={<Create />} />
-          </Routes>
+          <div className="appMain">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/recipes/:recipeId" element={<Recipe />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/create" element={<Create />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </>
     </div>
