@@ -1,0 +1,59 @@
+.Recipe { 
+  padding: 0 0 32px 0;
+}
+
+.card {
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: 1px solid #888;
+  box-sizing: border-box;
+  max-width: 960px;
+}
+
+.cookingTime {
+  font-size: smaller;
+}
+
+.ingredientsLine {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.ingredients {
+  background-color: hsl(276, 31%, 69%);
+  margin-top: 0.2rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+  /* border: 1px solid #555; */
+  border-radius: 0.8rem;
+}
+
+.ingredients::after {
+  content: ", ";
+}
+
+.ingredients:last-child::after {
+  content: "."
+}
+
+.button {
+  display: inline-block;
+  border: 1px solid rgb(89, 4, 146);
+  margin: 0.6rem 0 0.2rem;
+  padding: 0.4rem 0.6rem;
+  font-size: smaller;
+  background-color: #ddd;
+  color: rgb(89, 4, 146);
+  text-decoration: none;
+  border-radius: 0.3rem;
+}
+
+.button:hover {
+  background-color: rgb(89, 4, 146);
+  color: #ddd;
+  transition: all 0.2s ease;
+}
