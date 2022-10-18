@@ -29,3 +29,29 @@
   color: #ddd;
   transition: all 0.2s ease;
 }
+
+.Create .ingredientList  {
+  padding-bottom: 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Create .ingredient {
+  /* font-size: small; */
+
+  background-color: hsl(276, 31%, 69%);
+  margin-top: 0.2rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.8rem;
+}
+
+.Create .ingredient .removeButton {
+  /* width: 0.8rem; */
+  text-decoration: none;
+  background-color: #ddd;
+  padding: 0 5px 2px;
+  border-radius: 0.5rem;
+}
