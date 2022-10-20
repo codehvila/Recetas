@@ -1,9 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
 import styles from "./Create.module.css";
 
 export default function Create() {
+  const [isPending, setIsPending] = useState(false);
   const [title, setTitle] = useState("");
   const [cookingTime, setCookingTime] = useState("");
   const [method, setMethod] = useState("");
@@ -11,9 +13,30 @@ export default function Create() {
   const [ingredients, setIngredients] = useState([]);
   const ingredientInput = useRef(null);
 
+  const { postData, data, error } = useFetch(
+    "http://localhost:3005/recipes",
+    "POST"
+  );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data) {
+      setIsPending(false);
+      navigate("/");
+    }
+  }, [data, navigate]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(title, method, cookingTime);
+    setIsPending(true);
+
+    postData({
+      title,
+      cookingTime: cookingTime + " minutes",
+      ingredients,
+      method,
+    });
   };
 
   const handleAddIngredient = (e) => {
@@ -30,12 +53,14 @@ export default function Create() {
   };
 
   const handleRemoveIngredient = (ingredientToRemove) => {
-    setIngredients((prevIngredients) => {
-      return prevIngredients.filter((ingr) => {
-        return ingr !== ingredientToRemove;
+    if (!isPending) {
+      setIngredients((prevIngredients) => {
+        return prevIngredients.filter((ingr) => {
+          return ingr !== ingredientToRemove;
+        });
       });
-    });
-    ingredientInput.current.focus();
+      ingredientInput.current.focus();
+    }
   };
 
   return (
@@ -49,9 +74,9 @@ export default function Create() {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
             required
+            disabled={isPending}
           ></input>
         </label>
-
         <label>
           <div className={styles.ingredients}>
             <span>Ingredients: </span>
@@ -63,9 +88,11 @@ export default function Create() {
                     <a
                       href="#remove"
                       onClick={(e) => handleRemoveIngredient(ingr)}
-                      className={styles.removeButton}
+                      className={`${styles.removeButton}${
+                        isPending ? " " + styles.notallowed : ""
+                      }`}
                     >
-                      x
+                      {isPending ? "!" : "x"}
                     </a>
                   </span>
                 );
@@ -77,11 +104,17 @@ export default function Create() {
               onChange={(e) => setIngredient(e.target.value)}
               value={ingredient}
               ref={ingredientInput}
+              disabled={isPending}
             />
-            <button onClick={handleAddIngredient}>Add Ingredient</button>
+            <button
+              className={`${isPending ? " " + styles.disabled : ""}`}
+              onClick={handleAddIngredient}
+              disabled={isPending}
+            >
+              Add Ingredient
+            </button>
           </div>
         </label>
-
         <label>
           <span>Cooking Time (minutes)</span>
           <input
@@ -89,6 +122,7 @@ export default function Create() {
             onChange={(e) => setCookingTime(e.target.value)}
             value={cookingTime}
             required
+            disabled={isPending}
           ></input>
         </label>
         <label>
@@ -98,9 +132,17 @@ export default function Create() {
             value={method}
             rows="6"
             required
+            disabled={isPending}
           ></textarea>
         </label>
-        <button>Add Recipe</button>
+        <button
+          className={`${isPending ? " " + styles.disabled : ""}`}
+          disabled={isPending}
+        >
+          Add Recipe
+        </button>
+        {error && <div className="error">An error has ocurred: {error}!</div>}
+        {isPending && <p className="loading">Creating Recipes...</p>}
       </form>
     </div>
   );

@@ -2,6 +2,7 @@
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 2rem;
 }
 
 .Create input, textarea, button {
@@ -54,4 +55,13 @@
   background-color: #ddd;
   padding: 0 5px 2px;
   border-radius: 0.5rem;
+}
+
+.Create .disabled {
+  filter: grayscale(80%) brightness(30%);
+  cursor: wait !important;
+}
+
+.Create .notallowed {
+  cursor: not-allowed;
 }
