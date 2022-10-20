@@ -6,7 +6,8 @@
 
 .navbar nav {
   display: flex;
-  align-items: baseline;
+  gap: 1.8rem;
+  align-items: center;
   max-width: 960px; /* 1200px; */
   margin: 0 auto;
 }
