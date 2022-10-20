@@ -42,4 +42,13 @@ input, textarea {
 .loading, .error {
   text-align: center;
   margin: 40px auto;
+  font-size: smaller;
+  background-color: hsl(276, 31%, 69%);
+  padding: 0.8rem;
+  border-radius: 1.8rem;
+}
+
+.error {
+  background-color: #ff002b;
+  color: #ddd;
 }
