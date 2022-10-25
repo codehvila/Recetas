@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import styles from "./RecipeList.module.css";
 
 export default function RecipeList({ data: recipes }) {
+  if (recipes.length === 0) {
+    return <div className="error">Sorry! There are no recipe!</div>;
+  }
+
   return (
     <div className={styles.RecipeList}>
       {recipes &&
