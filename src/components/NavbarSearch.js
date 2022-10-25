@@ -1,18 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import styles from "./NavbarSearch.module.css";
 
 export default function NavbarSearch() {
   const [value, setValue] = useState("");
 
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("q");
+
+  useEffect(() => {
+    if (query !== null) {
+      setValue(query);
+    }
+  }, [query]);
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    navigate(`/search?q=${value}`);
-    console.log("Input data: ", value);
+    const valueSpaceSplited = value && value.split(" ");
+    const singleSpaced =
+      valueSpaceSplited && valueSpaceSplited.filter((val) => val !== "");
+
+    navigate(`/search?q=${singleSpaced.join("+")}`);
   };
   return (
     <div className={styles.NavbarSearch}>
