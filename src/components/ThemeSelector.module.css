@@ -20,3 +20,14 @@
 .ThemeColors div:hover {
   border-radius: 3px;
 }
+
+.ThemeColors img {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  transition: ease-in 0.2s;
+}
+
+.ThemeColors img:hover {
+  transform: rotateZ(180deg);
+}

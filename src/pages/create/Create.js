@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
+import { useTheme } from "../../hooks/useTheme";
+
 import styles from "./Create.module.css";
 
 export default function Create() {
@@ -12,6 +14,8 @@ export default function Create() {
   const [ingredient, setIngredient] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const ingredientInput = useRef(null);
+
+  const { mode } = useTheme();
 
   const { postData, data, error } = useFetch(
     "http://localhost:3005/recipes",
@@ -107,7 +111,9 @@ export default function Create() {
               disabled={isPending}
             />
             <button
-              className={`${isPending ? " " + styles.disabled : ""}`}
+              className={`${styles[mode]}${
+                isPending ? " " + styles.disabled : ""
+              }`}
               onClick={handleAddIngredient}
               disabled={isPending}
             >
@@ -136,7 +142,7 @@ export default function Create() {
           ></textarea>
         </label>
         <button
-          className={`${isPending ? " " + styles.disabled : ""}`}
+          className={`${styles[mode]}${isPending ? " " + styles.disabled : ""}`}
           disabled={isPending}
         >
           Add Recipe

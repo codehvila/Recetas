@@ -40,7 +40,7 @@
   content: "."
 }
 
-.button {
+.button, .button.light {
   display: inline-block;
   border: 1px solid rgb(89, 4, 146);
   margin: 0.6rem 0 0.2rem;
@@ -52,8 +52,26 @@
   border-radius: 0.3rem;
 }
 
-.button:hover {
+.button:hover, .button.light:hover {
   background-color: rgb(89, 4, 146);
   color: #ddd;
+  transition: all 0.2s ease;
+}
+
+.button.dark {
+  display: inline-block;
+  border: 1px solid rgb(89, 4, 146);
+  margin: 0.6rem 0 0.2rem;
+  padding: 0.4rem 0.6rem;
+  font-size: smaller;
+  background-color: rgb(89, 4, 146);
+  color: #ddd;
+  text-decoration: none;
+  border-radius: 0.3rem;
+}
+
+.button.dark:hover {
+  background-color: #ddd;
+  color: rgb(89, 4, 146);
   transition: all 0.2s ease;
 }

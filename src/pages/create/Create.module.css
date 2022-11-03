@@ -18,16 +18,29 @@
   margin-bottom: 1rem;
 }
 
-.Create button {
+.Create button, .Create button.light {
   cursor: pointer;
   background-color: #fff;
   border: 1px solid rgb(89, 4, 146);
   color: rgb(89, 4, 146);
 }
 
-.Create button:hover {
+.Create button:hover, .Create button.light:hover {
   background-color: rgb(89, 4, 146);
   color: #ddd;
+  transition: all 0.2s ease;
+}
+
+.Create button.dark {
+  cursor: pointer;
+  border: 1px solid rgb(89, 4, 146);
+  background-color: rgb(89, 4, 146);
+  color: #ddd;
+}
+
+.Create button.dark:hover {
+  background-color: #fff;
+  color: rgb(89, 4, 146);
   transition: all 0.2s ease;
 }
 

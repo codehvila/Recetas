@@ -2,6 +2,15 @@
   min-height: 100%;
 }
 
+.App.dark {
+  background-color: #3c3c3c;
+  color: #ccc;
+}
+
+.App.dark span {
+  color: #eee;
+}
+
 .appMain {
   max-width: 960px;
   margin-left: auto;

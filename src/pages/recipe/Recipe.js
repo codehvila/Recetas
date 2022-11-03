@@ -1,12 +1,15 @@
 import { useParams, Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
+import { useTheme } from "../../hooks/useTheme";
+
 import styles from "./Recipe.module.css";
 
 export default function Recipe() {
   const { recipeId } = useParams();
   const endPoint = "http://localhost:3005/recipes/" + recipeId;
   const { data: recipe, isPending, error } = useFetch(endPoint);
+  const { mode } = useTheme();
 
   return (
     <div className={styles.Recipe}>
@@ -27,7 +30,10 @@ export default function Recipe() {
             ))}
           </div>
           <p>{recipe.method}</p>
-          <Link to={`/recipes/${recipe.id}`} className={styles.button}>
+          <Link
+            to={`/recipes/${recipe.id}`}
+            className={`${styles.button} ${styles[mode]}`}
+          >
             Read Recipe
           </Link>
         </div>
