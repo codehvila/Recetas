@@ -93,3 +93,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Run json-server
 `$ json-server --watch ./data/db.json --port 3005`
 
+## Create a `.env` file
+Create a `.env` file in the root of your project.
+
+`$ touch .env.development.local`
+
+Include it sensible information:
+
+```
+REACT_APP_MYSECRETFIRSTNAME="Hugo"
+REACT_APP_MYSECRETALIASNAME="Hugh"
+```
+
+create-react-app include dotenv.
+
+Access variable in your code: 
+
+`console.log(process.env.REACT_APP_MYSECRETFIRSTNAME);`
+
