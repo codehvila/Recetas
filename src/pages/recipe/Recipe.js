@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import { db } from "../../firebase/firebase.config";
 
 import { useTheme } from "../../hooks/useTheme";
 
@@ -7,9 +8,32 @@ import styles from "./Recipe.module.css";
 
 export default function Recipe() {
   const { recipeId } = useParams();
-  const endPoint = "http://localhost:3005/recipes/" + recipeId;
-  const { data: recipe, isPending, error } = useFetch(endPoint);
   const { mode } = useTheme();
+
+  const [error, setError] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const [recipe, setRecipe] = useState(null);
+
+  useEffect(() => {
+    setIsPending(true);
+
+    db.collection("recipes")
+      .doc(recipeId)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setIsPending(false);
+          setRecipe({ id: doc.id, ...doc.data() });
+        } else {
+          setIsPending(false);
+          setError("No recipe found!");
+        }
+      })
+      .catch((err) => {
+        setIsPending(false);
+        setError(err.message);
+      });
+  }, [recipeId]);
 
   return (
     <div className={styles.Recipe}>
