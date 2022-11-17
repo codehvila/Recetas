@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import { db } from "../../firebase/firebase.config";
 
 import { useTheme } from "../../hooks/useTheme";
 
@@ -8,6 +8,7 @@ import styles from "./Create.module.css";
 
 export default function Create() {
   const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(false);
   const [title, setTitle] = useState("");
   const [cookingTime, setCookingTime] = useState("");
   const [method, setMethod] = useState("");
@@ -17,30 +18,33 @@ export default function Create() {
 
   const { mode } = useTheme();
 
-  const { postData, data, error } = useFetch(
-    "http://localhost:3005/recipes",
-    "POST"
-  );
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (data) {
-      setIsPending(false);
-      navigate("/");
-    }
-  }, [data, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsPending(true);
 
-    postData({
+    const doc = {
       title,
       cookingTime: cookingTime + " minutes",
-      ingredients,
       method,
-    });
+      ingredients,
+    };
+
+    db.collection("recipes")
+      .add(doc)
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        if (docRef) {
+          setIsPending(false);
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.error("Error adding document: ", err.message);
+        setIsPending(false);
+        setError(err.message);
+      });
   };
 
   const handleAddIngredient = (e) => {
