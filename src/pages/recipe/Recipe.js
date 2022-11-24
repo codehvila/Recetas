@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { db } from "../../firebase/firebase.config";
 
 import { useTheme } from "../../hooks/useTheme";
+
+import deleteIcon from "../../assets/delete_FILL0_wght400_GRAD0_opsz48.svg";
 
 import styles from "./Recipe.module.css";
 
@@ -13,6 +15,8 @@ export default function Recipe() {
   const [error, setError] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [recipe, setRecipe] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsPending(true);
@@ -35,6 +39,20 @@ export default function Recipe() {
       });
   }, [recipeId]);
 
+  const handleClick = (id) => {
+    console.log("Trying to delete recipe: ", id);
+    db.collection("recipes")
+      .doc(id)
+      .delete()
+      .then(() => {
+        console.log("\nRecipe was deleted: ", id);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log("I can't delete recipe: ", err.message);
+      });
+  };
+
   return (
     <div className={styles.Recipe}>
       <h2>Recipe Details</h2>
@@ -55,10 +73,17 @@ export default function Recipe() {
           </div>
           <p>{recipe.method}</p>
           <Link
+            onClick={() => handleClick(recipe.id)}
             to={`/recipes/${recipe.id}`}
             className={`${styles.button} ${styles[mode]}`}
           >
-            Read Recipe
+            <img
+              className={`${styles.deleteIcon} ${styles[mode]}`}
+              src={deleteIcon}
+              alt="Delete Recipe"
+            />
+            {"\u00A0"}
+            Delete Recipe
           </Link>
         </div>
       )}
