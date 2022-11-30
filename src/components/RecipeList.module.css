@@ -12,6 +12,9 @@
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
   margin: 0.5rem 0;
   padding: 1rem;
   border: 1px solid #888;
@@ -81,4 +84,29 @@
   background-color: #ddd;
   color: rgb(89, 4, 146);
   transition: all 0.2s ease;
+}
+
+.deleteIcon, .deleteIcon.light {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  transition: ease-in 0.2s;
+}
+
+.deleteIcon:hover, .deleteIcon.light:hover {
+  transform: rotateZ(180deg);
+  filter: invert(0);
+}
+
+.deleteIcon.dark {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  filter: invert(1);
+  transition: ease-in 0.2s;
+}
+
+.deleteIcon.dark:hover {
+  transform: rotateZ(180deg);
+  filter: invert(1);
 }

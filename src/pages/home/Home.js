@@ -13,25 +13,28 @@ export default function Home() {
   useEffect(() => {
     setIsPending(true);
 
-    db.collection("recipes")
-      .get()
-      .then((querySnapshot) => {
-        if (querySnapshot.empty) {
+    const unsubscribe = db.collection("recipes").onSnapshot(
+      (docs) => {
+        if (docs.empty) {
           setError("No recipes to show!");
           setIsPending(false);
         } else {
+          setError(false);
           let results = [];
-          querySnapshot.docs.forEach((doc) => {
+          docs.forEach((doc) => {
             results.push({ id: doc.id, ...doc.data() });
             setRecipes(results);
-            setIsPending(false);
           });
+          setIsPending(false);
         }
-      })
-      .catch((err) => {
+      },
+      (err) => {
         setError(err.message);
         setIsPending(false);
-      });
+      }
+    );
+
+    return () => unsubscribe();
   }, []);
 
   return (
