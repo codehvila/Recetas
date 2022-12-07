@@ -101,3 +101,29 @@
   transform: rotateZ(180deg);
   filter: invert(0);
 }
+
+
+.editIcon, .editIcon.light {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  transition: ease-in 0.2s;
+}
+
+.editIcon:hover, .editIcon.light:hover {
+  transform: rotateZ(180deg);
+  filter: invert(1);
+}
+
+.editIcon.dark {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  filter: invert(1);
+  transition: ease-in 0.2s;
+}
+
+.editIcon.dark:hover {
+  transform: rotateZ(180deg);
+  filter: invert(0);
+}

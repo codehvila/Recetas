@@ -1,0 +1,82 @@
+.Update {
+  max-width: 480px;
+  max-width: 45rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 2rem;
+}
+
+.Update input, textarea, button {
+  color: #333;
+  font-size: 1rem;
+  border-radius: calc(1rem / 4);
+  border: 1px solid #d4d4d4;
+  background-color: #fff;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: calc(1rem / 2);
+  margin-bottom: 1rem;
+}
+
+.Update button, .Update button.light {
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid rgb(89, 4, 146);
+  color: rgb(89, 4, 146);
+}
+
+.Update button:hover, .Update button.light:hover {
+  background-color: rgb(89, 4, 146);
+  color: #ddd;
+  transition: all 0.2s ease;
+}
+
+.Update button.dark {
+  cursor: pointer;
+  border: 1px solid rgb(89, 4, 146);
+  background-color: rgb(89, 4, 146);
+  color: #ddd;
+}
+
+.Update button.dark:hover {
+  background-color: #fff;
+  color: rgb(89, 4, 146);
+  transition: all 0.2s ease;
+}
+
+
+.Update .ingredientList  {
+  padding-bottom: 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Update .ingredient {
+  /* font-size: small; */
+
+  background-color: hsl(276, 31%, 69%);
+  margin-top: 0.2rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.8rem;
+}
+
+.Update .ingredient .removeButton {
+  /* width: 0.8rem; */
+  text-decoration: none;
+  background-color: #ddd;
+  padding: 0 5px 2px;
+  border-radius: 0.5rem;
+}
+
+.Update .disabled {
+  filter: grayscale(80%) brightness(30%);
+  cursor: wait !important;
+}
+
+.Update .notallowed {
+  cursor: not-allowed;
+}
